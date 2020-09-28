@@ -1,6 +1,7 @@
 package client1
 
 import (
+	"html/template"
 	"net/http"
 	//"os"
 )
@@ -17,8 +18,15 @@ import (
 // 	http.ListenAndServe(":"+port, mux)
 // }
 
+var tpl = template.Must(template.ParseFiles("client1/index.html"))
+
 func Client1Handler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello!"))
+		//w.Write(view())
+		tpl.Execute(w, nil)
 	}
+}
+
+func view() []byte {
+	return []byte("")
 }

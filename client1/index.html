@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Client 1</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<main>
+  <header>
+    <span>Type message</span>
+    <input autofocus value=""
+    placeholder="Enter a news topic" type="search" name="q" length="128" width="128"
+    onsearch="fetch('http://localhost:2020/query', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ query: '{ posts { title } }', variables: {} }),
+})
+  .then(res => res.json())
+  .then(res => console.log(res.data));">
+  </header>
+</main>
+</html>
