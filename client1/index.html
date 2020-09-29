@@ -6,19 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Client 1</title>
   <link rel="stylesheet" href="/assets/style.css">
+  <script type="text/javascript">
+    var clientMessageId = 0
+  
+    sendMessage = function (text) {
+    	fetch("http://localhost:2020/query", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: "mutation Client1Message($message: NewMessage!) {"+
+            "createMessage(input: $message) {"+
+              "id"+
+              "text"+
+            "}"+
+          "}", variables: "{"+
+            "'message': {"+
+              "'id': ++clientMessageId,"+
+              "'text': text"+
+            "}"+
+          "}" }),
+        })
+        .then(res => res.json())
+        .then(res => console.log(res.data));
+    }
+  </script>
 </head>
 <main>
   <header>
     <span>Type message</span>
     <input autofocus value=""
     placeholder="Enter a news topic" type="search" name="q" length="128" width="128"
-    onsearch="fetch('http://localhost:2020/query', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ query: '{ posts { title } }', variables: {} }),
-})
-  .then(res => res.json())
-  .then(res => console.log(res.data));">
+    onsearch="sendMessage(this.value);">
   </header>
 </main>
 </html>
