@@ -46,9 +46,9 @@ resolver:
 models:
   Message:
     model: ./graph/model.Message
-    fields:
-      timestamp:
-        resolver: true
+    #fields:
+    #  timestamp:
+    #    resolver: true
       
 #  ID:
 #    model:

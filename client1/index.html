@@ -13,20 +13,30 @@
     	fetch("http://localhost:2020/query", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: "mutation Client1Message($message: NewMessage!) {"+
-            "createMessage(input: $message) {"+
-              "id"+
-              "text"+
-            "}"+
-          "}", variables: "{"+
-            "'message': {"+
-              "'id': ++clientMessageId,"+
-              "'text': text"+
-            "}"+
-          "}" }),
-        })
+          body: JSON.stringify({ query: `mutation Client1Message($message: NewMessage!) {
+              createMessage(input: $message) {
+                id
+                text
+              }
+            }`, variables: {
+              'message': {
+                'id': ++clientMessageId,
+                'text': text
+              }
+            } 
+          }),
+      })
         .then(res => res.json())
-        .then(res => console.log(res.data));
+        .then(res => getResponse(res));
+    }
+    
+    getResponse = function (res) {
+      if (res.errors.length > 0) {
+        console.error(res);
+        return ;
+      }
+      
+      console.log(res.data);
     }
   </script>
 </head>

@@ -11,15 +11,15 @@ import (
 )
 
 func (r *messageResolver) Timestamp(ctx context.Context, obj *model.Message) (string, error) {
-	panic(fmt.Errorf("not implemented 1"))
+	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *mutationResolver) CreateMessage(ctx context.Context, input model.NewMessage) (*model.Message, error) {
-	panic(fmt.Errorf("not implemented 2"))
+	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *queryResolver) Messages(ctx context.Context, limit *int, offset *int) ([]*model.Message, error) {
-	panic(fmt.Errorf("not implemented 3"))
+	panic(fmt.Errorf("not implemented"))
 }
 
 // Message returns generated.MessageResolver implementation.
