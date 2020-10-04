@@ -10,7 +10,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 
-	"test1/client1"
+	"test1/mvc/controller"
 )
 
 const defaultPort = "2020"
@@ -21,11 +21,11 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
+	http.Handle("/p", playground.Handler("GraphQL playground", "/query"))
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 	http.Handle("/query", srv)
-	http.Handle("/client1", client1.Client1Handler())
+	http.Handle("/", controller.Handler())
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
