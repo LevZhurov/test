@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"strings"
 
-	//"test1/mvc/controller/client1"
-
 	"test1/mvc/model"
 	"test1/mvc/view"
 )
