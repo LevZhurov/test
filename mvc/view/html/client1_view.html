@@ -10,7 +10,7 @@
     var clientMessageId = 0
   
     sendMessage = function (text) {
-    	fetch("http://localhost:2020/query", {
+    	fetch("http://localhost:2020/graphql", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ query: `mutation Client1Message($message: NewMessage!) {
